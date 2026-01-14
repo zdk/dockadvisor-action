@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Lint Dockerfile
-        uses: your-username/dockadvisor-action@v1
+        uses: zdk/dockadvisor-action@v1
         with:
           dockerfile: 'Dockerfile'
 ```
@@ -44,7 +44,7 @@ jobs:
 
       - name: Lint Dockerfile
         id: dockadvisor
-        uses: your-username/dockadvisor-action@v1
+        uses: zdk/dockadvisor-action@v1
         with:
           dockerfile: 'Dockerfile'
           fail-on-error: 'true'
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Lint ${{ matrix.dockerfile }}
-        uses: your-username/dockadvisor-action@v1
+        uses: zdk/dockadvisor-action@v1
         with:
           dockerfile: ${{ matrix.dockerfile }}
           fail-on-error: 'true'
@@ -156,7 +156,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Support
 
-If you encounter any issues or have questions, please [open an issue](https://github.com/your-username/dockadvisor-action/issues).
+If you encounter any issues or have questions, please [open an issue](https://github.com/zdk/dockadvisor-action/issues).
 
 ## Related Projects
 
