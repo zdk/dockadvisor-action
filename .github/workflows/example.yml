@@ -1,0 +1,35 @@
+name: Example - Dockerfile Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-dockerfile:
+    name: Lint Dockerfile
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Dockadvisor
+        id: dockadvisor
+        uses: ./
+        with:
+          dockerfile: 'dockadvisor/Dockerfile'
+          fail-on-error: 'true'
+          fail-on-warning: 'false'
+          minimum-score: '70'
+
+      - name: Display results
+        if: always()
+        run: |
+          echo "### Dockadvisor Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Score**: ${{ steps.dockadvisor.outputs.score }}/100" >> $GITHUB_STEP_SUMMARY
+          echo "- **Errors**: ${{ steps.dockadvisor.outputs.errors }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Warnings**: ${{ steps.dockadvisor.outputs.warnings }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Result**: ${{ steps.dockadvisor.outputs.result }}" >> $GITHUB_STEP_SUMMARY

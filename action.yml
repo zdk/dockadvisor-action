@@ -1,0 +1,43 @@
+name: 'Dockadvisor - Dockerfile Linter'
+description: 'Analyze and lint Dockerfiles for best practices, security issues, and potential problems'
+author: 'deckrun'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+
+inputs:
+  dockerfile:
+    description: 'Path to the Dockerfile to analyze'
+    required: false
+    default: 'Dockerfile'
+  fail-on-error:
+    description: 'Fail the action if errors are found'
+    required: false
+    default: 'false'
+  fail-on-warning:
+    description: 'Fail the action if warnings are found'
+    required: false
+    default: 'false'
+  minimum-score:
+    description: 'Minimum acceptable score (0-100). Fail if score is below this threshold'
+    required: false
+    default: '0'
+
+outputs:
+  score:
+    description: 'The Dockerfile quality score (0-100)'
+  errors:
+    description: 'Number of errors found'
+  warnings:
+    description: 'Number of warnings found'
+  result:
+    description: 'Overall result: passed or failed'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dockerfile }}
+    - ${{ inputs.fail-on-error }}
+    - ${{ inputs.fail-on-warning }}
+    - ${{ inputs.minimum-score }}
